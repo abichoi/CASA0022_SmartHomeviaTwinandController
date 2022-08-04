@@ -20,19 +20,9 @@ float humi= 0;
 float temp = 0;
 float voc = 0;
 String location = "Waiting for update";
-//char* contact;
-//char* maindoor;
 bool maindoor_contact = false;
-//char* bathdoor;
 bool bathdoor_contact = false;
-//char* window;
 bool window_contact = false;
-//char* desk_motion;
-//bool desk_occ = false;
-//char* bed_motion;
-//bool bed_occ = false;
-//char* kitchen_motion;
-//bool kitchen_occ = false;
 bool strip_onoff = false;
 String strip_rgb;
 byte  strip_R = 0;
@@ -59,9 +49,6 @@ const char topic_location[] = TOPIC_LOCATION;
 const char topic_main_door[] = TOPIC_DOOR1;
 const char topic_bath_door[] = TOPIC_DOOR2;
 const char topic_window[] = TOPIC_DOOR3;
-//const char topic_desk_motion[] = TOPIC_MOTION1;
-//const char topic_bed_motion[] = TOPIC_MOTION2;
-//const char topic_kitchen_motion[] = TOPIC_MOTION3;
 const char topic_strip_onoff[] = TOPIC_STRIP_ONOFF;
 const char topic_strip_rgb[] = TOPIC_STRIP_RGB;
 const char topic_strip_brightness[] = TOPIC_STRIP_BRIGHTNESS;
@@ -224,10 +211,6 @@ void callback(String topic, byte* payload, unsigned int length) {
   Serial.print(topic);
   Serial.println("] ");
   char combine[length+1];
-//  char on_compare[3];
-//  on_compare[0] = o;
-//  on_compare[1] = n;
-//  on_compare[2] = NULL;
   for (int i = 0; i < length; i++) {
     combine[i]= (char)payload[i];
     Serial.print((char)payload[i]);
@@ -306,17 +289,8 @@ void callback(String topic, byte* payload, unsigned int length) {
   }else if (topic == topic_strip_onoff){
     if (strcmp(combine,"on")==0){
       strip_onoff = true;
-//    for (int i=0; i<NUMPIXELS; i++){
-//      pixels.setPixelColor(i,pixels.Color(strip_R, strip_G, strip_B));
-//    }
-//      pixels.show();
     } else{
       strip_onoff = false;
-//      pixels.clear();
-//      for (int i=0; i<NUMPIXELS; i++){
-//        pixels.setPixelColor(i,pixels.Color(0, 0, 0));
-//      }
-//      pixels.show();
      }
      Serial.print("strip_onoff:");
     Serial.println(strip_onoff);
@@ -342,9 +316,7 @@ void callback(String topic, byte* payload, unsigned int length) {
       for (int i=0; i<NUMPIXELS; i++){
       pixels.setPixelColor(i,pixels.Color(strip_R*strip_brightness, strip_G*strip_brightness, strip_B*strip_brightness));
       }
-//      if (strip_onoff == true){
       pixels.show();
-//      }
      } else{
       strip_onoff = false;
       strip_brightness = 0;
@@ -394,8 +366,6 @@ void callback(String topic, byte* payload, unsigned int length) {
     Serial.println(window_contact);
     Serial.print("strip_onoff:");
     Serial.println(strip_onoff);
-//    Serial.print("strip_rgb:");
-//    Serial.println(strip_rgb);
     Serial.print("strip_R:");
     Serial.println(strip_R);
     Serial.print("strip_G:");
