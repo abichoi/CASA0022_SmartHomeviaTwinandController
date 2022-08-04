@@ -212,7 +212,6 @@ void loop() {
     isPressing_strip_button = false;
   }
 
-//  if(isPressing_strip_button == true && isLongDetected_strip_button == false) {
   if(isPressing_strip_button == true) {
     long pressDuration_strip_button = millis() - pressedTime_strip_button;
   
