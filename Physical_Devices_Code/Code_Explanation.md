@@ -1,2 +1,2 @@
-# CASA0022_SmartHomeviaTwinandController
+# Code Explanation
 This repository is a dissertation for UCL MSc Connected Environment
