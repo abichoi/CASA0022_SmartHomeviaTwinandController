@@ -1,5 +1,5 @@
 # Can the concept of a smart home be used in a small living space and linked to a physical model with two-way communication for real-time IoT data?
-This repository is a dissertation for UCL MSc Connected Environments.
+This repository is a part of a dissertation for UCL MSc Connected Environments.
 
 ## Hypothesis: Deploying a smart home system in a small living space via a physical twin and controller communication model.
 
