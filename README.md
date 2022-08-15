@@ -29,6 +29,10 @@ It is possible to deploy a smart home in a small living space and utilise the da
 11. 220Ω Resistor
 12. NeoPixel Stick
 13. Power Bank: Anker PowerCore 20000 PD (Optional)
+#### Files
+Version 1: DigitalTwin_3DPrintWall_Github v3.f3d
+Version 2: DigitalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
+
 
 ### Controller
 1. Modeling Software: Autodesk Fusion 360
@@ -42,6 +46,8 @@ It is possible to deploy a smart home in a small living space and utilise the da
 10. 4.7k Resistor
 11. Potentiometer x2
 12. Diode x2
+#### File
+Buttons_GIthub v11.f3d
 
 ### Self-Built Air Monitor
 1. Modeling Software: Autodesk Fusion 360
@@ -50,6 +56,8 @@ It is possible to deploy a smart home in a small living space and utilise the da
 4. PMS5003 Particulate Matter Sensor
 5. SGP30
 6. Raspberry Pi 4B
+#### File
+SelfBuiltAirMonitor_Case_Github v3.f3d
 
 ### Smart Home
 1. Smart Home Platform: Home Assistant
@@ -60,3 +68,13 @@ It is possible to deploy a smart home in a small living space and utilise the da
 6. Aqara Door and Window Sensor
 7. TP-LINK Kasa Smart Bulb LB110
 8. TP-Link Kasa Smart Light Strip KL430
+#### Intergrations
+1. MQTT
+2. OpenWeatherMap
+3. TP-Link Kasa Smart
+#### Add-ons
+1. File editor
+2. Terminal & SSH
+3. Grafana
+4. InfluxDB
+5. Zigbee2MQTT
