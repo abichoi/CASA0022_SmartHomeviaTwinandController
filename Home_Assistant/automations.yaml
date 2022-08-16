@@ -1,0 +1,913 @@
+- id: '1653675952507'
+  alias: Update Light Bulb Status
+  description: 'Publish Lamp Status to MQTT
+
+    Whether it is on and the current brightness '
+  trigger:
+  - platform: state
+    entity_id:
+    - light.desklamp
+    attribute: brightness
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  - platform: device
+    type: changed_states
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/DeskLamp/OnorOff
+      qos: '2'
+      payload_template: '{{ states(''light.desklamp'') }}'
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/DeskLamp/Brightness
+      qos: '2'
+      payload_template: '{{ (states.light.desklamp.attributes.brightness) }}'
+  mode: single
+- id: '1653682244517'
+  alias: Update Light Strip Status
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.lightstrip
+    attribute: brightness
+  - platform: state
+    entity_id:
+    - light.lightstrip
+    attribute: rgb_color
+  - platform: device
+    type: changed_states
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/LightStrip/OnorOff
+      qos: '2'
+      payload_template: '{{ states(''light.lightstrip'') }}'
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/LightStrip/Brightness
+      qos: '2'
+      payload_template: '{{ (states.light.lightstrip.attributes.brightness)/255*100
+        }}'
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/LightStrip/rgb_color
+      qos: '2'
+      payload_template: '{{ (states.light.lightstrip.attributes.rgb_color)}}'
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/LightStrip/Brightness255
+      qos: '2'
+      payload_template: '{{ (states.light.lightstrip.attributes.brightness) }}'
+  mode: single
+- id: '1653683990822'
+  alias: When User Left
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.door1_contact
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+    enabled: true
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.motion1_occupancy
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.motion2_occupancy
+    state: 'off'
+  - condition: state
+    state: 'off'
+    entity_id: binary_sensor.motion3_occupancy
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: light.desklamp
+      state: 'on'
+    - condition: state
+      entity_id: light.lightstrip
+      state: 'on'
+    enabled: true
+  action:
+  - type: turn_off
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  - type: turn_off
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/Location
+      payload: Left
+      qos: '2'
+  mode: single
+- id: '1653687235096'
+  alias: When User Come Back
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.door1_contact
+    from: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+    to: 'off'
+  - platform: state
+    entity_id:
+    - binary_sensor.door2_contact
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  condition:
+  - condition: state
+    entity_id: light.lightstrip
+    state: 'off'
+  action:
+  - service: light.turn_on
+    data:
+      color_temp: 343
+      brightness: 255
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1653687808023'
+  alias: Sleep Time
+  description: 'When Bed Motion Sensor is detected, a 2 min timer is set to countdown
+
+    Desk motion sensor and Kitchen motion sensor''s occupancy will be off if the user
+    is on the bed
+
+    If user is on bed => decrease the brightness of both lights slowly (should take
+    about 18 min) until they turn off
+
+    from 2300'
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion2_occupancy
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: device
+    type: is_on
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+    enabled: true
+  - condition: time
+    after: '22:00:00'
+    before: 05:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+    enabled: true
+  action:
+  - delay:
+      hours: 0
+      minutes: 4
+      seconds: 0
+      milliseconds: 0
+    enabled: true
+  - condition: state
+    state: 'off'
+    entity_id: binary_sensor.motion1_occupancy
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  - condition: state
+    state: 'off'
+    entity_id: binary_sensor.motion3_occupancy
+  - repeat:
+      until:
+      - condition: device
+        type: is_off
+        device_id: 18fdd4c2e60f26092616d65ebb41bc43
+        entity_id: light.desklamp
+        domain: light
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0
+      - condition: device
+        type: is_off
+        device_id: ab20328f975dbb2cda819b0154accefa
+        entity_id: light.lightstrip
+        domain: light
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0
+      sequence:
+      - device_id: 18fdd4c2e60f26092616d65ebb41bc43
+        domain: light
+        entity_id: light.desklamp
+        type: brightness_decrease
+      - device_id: ab20328f975dbb2cda819b0154accefa
+        domain: light
+        entity_id: light.lightstrip
+        type: brightness_decrease
+      - delay:
+          hours: 0
+          minutes: 1
+          seconds: 0
+          milliseconds: 0
+        enabled: true
+  mode: single
+- id: '1653689623034'
+  alias: VOC is high
+  description: 'When VOC is high, send notification to the user to remind them to
+    open the window if the window is closed
+
+    LED strip flashes between red and white twice'
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.airmonitor_tvoc
+  - platform: state
+    entity_id:
+    - binary_sensor.door3_contact
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    state: 'on'
+    entity_id: binary_sensor.door3_contact
+  - condition: numeric_state
+    entity_id: sensor.airmonitor_tvoc
+    above: '100'
+    enabled: true
+  - condition: not
+    conditions:
+    - condition: time
+      after: '22:00:00'
+      before: 06:00:00
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+  action:
+  - device_id: e65ca273990fb141ed49b2630099b6ce
+    domain: mobile_app
+    type: notify
+    message: Open the window!
+    title: VOC level is higher than normal
+  - repeat:
+      count: 2
+      sequence:
+      - service: light.turn_on
+        data:
+          rgb_color:
+          - 0
+          - 251
+          - 255
+        target:
+          device_id: ab20328f975dbb2cda819b0154accefa
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - service: light.turn_on
+        data:
+          rgb_color:
+          - 255
+          - 255
+          - 255
+        target:
+          device_id: ab20328f975dbb2cda819b0154accefa
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+  mode: single
+- id: '1653856622596'
+  alias: When user is in desk area
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion1_occupancy
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: device
+    type: is_off
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+    enabled: true
+  - condition: time
+    before: '22:00:00'
+    weekday:
+    - sun
+    - sat
+    - fri
+    - thu
+    - wed
+    - tue
+    - mon
+    enabled: true
+    after: 07:00:00
+  - condition: device
+    type: is_on
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  action:
+  - type: turn_on
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+    brightness_pct: 100
+  - service: light.turn_on
+    data:
+      color_temp: 260
+      brightness: 255
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1653857146630'
+  alias: When it is late and user is still at the desk
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion1_occupancy
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: '22:00:00'
+    before: 06:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  - condition: device
+    type: is_on
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  - condition: device
+    type: is_on
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  - condition: state
+    entity_id: binary_sensor.motion1_occupancy
+    state: 'on'
+    enabled: false
+  action:
+  - service: light.turn_on
+    data:
+      transition: 60
+      color_temp: 390
+    target:
+      device_id:
+      - ab20328f975dbb2cda819b0154accefa
+  - service: light.turn_on
+    data:
+      transition: 60
+      brightness_pct: 80
+    target:
+      device_id: 18fdd4c2e60f26092616d65ebb41bc43
+  mode: single
+- id: '1653857861351'
+  alias: Update Where The User Is
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion1_occupancy
+  - platform: state
+    entity_id:
+    - binary_sensor.motion2_occupancy
+  - platform: state
+    entity_id:
+    - binary_sensor.motion3_occupancy
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: binary_sensor.motion1_occupancy
+      state: 'on'
+    then:
+    - service: mqtt.publish
+      data:
+        topic: student/CASA0022/ucfnsmc/Location
+        payload: Area1
+        qos: '2'
+    else:
+    - if:
+      - condition: state
+        entity_id: binary_sensor.motion2_occupancy
+        state: 'on'
+      then:
+      - service: mqtt.publish
+        data:
+          topic: student/CASA0022/ucfnsmc/Location
+          payload: Area2
+          qos: '2'
+      else:
+      - if:
+        - condition: state
+          state: 'on'
+          entity_id: binary_sensor.motion3_occupancy
+        then:
+        - service: mqtt.publish
+          data:
+            topic: student/CASA0022/ucfnsmc/Location
+            payload: Area3
+            qos: '2'
+        else: []
+  mode: single
+- id: '1653858149873'
+  alias: When user is in bathroom
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.door2_contact
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.motion1_occupancy
+    state: 'off'
+    enabled: false
+  - condition: state
+    entity_id: binary_sensor.motion2_occupancy
+    state: 'off'
+    enabled: false
+  - condition: state
+    state: 'off'
+    entity_id: binary_sensor.motion3_occupancy
+    enabled: false
+  - condition: state
+    entity_id: light.lightstrip
+    state: 'on'
+    enabled: false
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id:
+      - 18fdd4c2e60f26092616d65ebb41bc43
+      - ab20328f975dbb2cda819b0154accefa
+    enabled: false
+  - service: mqtt.publish
+    data:
+      topic: student/CASA0022/ucfnsmc/Location
+      qos: '2'
+      payload: Area4
+    enabled: false
+  - if:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.motion1_occupancy
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.motion2_occupancy
+        state: 'off'
+      - condition: state
+        state: 'off'
+        entity_id: binary_sensor.motion3_occupancy
+      - condition: state
+        entity_id: light.lightstrip
+        state: 'on'
+    then:
+    - service: light.turn_off
+      data: {}
+      target:
+        device_id:
+        - 18fdd4c2e60f26092616d65ebb41bc43
+        - ab20328f975dbb2cda819b0154accefa
+    - service: mqtt.publish
+      data:
+        topic: student/CASA0022/ucfnsmc/Location
+        qos: '2'
+        payload: Area4
+  mode: single
+- id: '1654044911603'
+  alias: When user wake up in the middle of night
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion2_occupancy
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: '22:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+    before: 05:59:00
+    enabled: true
+  - condition: device
+    type: is_off
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  - condition: device
+    type: is_off
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  action:
+  - service: light.turn_on
+    data:
+      color_temp: 390
+      brightness_pct: 20
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  - delay:
+      hours: 0
+      minutes: 3
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  mode: single
+- id: '1654343544792'
+  alias: When user wake up in the morning
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion2_occupancy
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: 06:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+    before: '11:00:00'
+    enabled: true
+  - condition: device
+    type: is_off
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  - condition: device
+    type: is_off
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  action:
+  - if:
+    - condition: state
+      entity_id: sensor.openweathermap_forecast_condition
+      state: rainy
+    then:
+    - service: tplink.random_effect
+      data:
+        brightness: 100
+        brightness_range: 90, 100
+        random_seed: 80
+        init_states: 203,14,100
+        backgrounds:
+        - - 203
+          - 14
+          - 100
+        - - 180
+          - 0
+          - 0
+        transition: 1000
+        fadeoff: 1000
+        duration: 5000
+        transition_range: 1000, 6000
+      target:
+        device_id: ab20328f975dbb2cda819b0154accefa
+      enabled: false
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+      enabled: false
+    - service: tplink.random_effect
+      data:
+        init_states: 30,40,100
+      target:
+        device_id: ab20328f975dbb2cda819b0154accefa
+      enabled: false
+    - service: light.turn_on
+      data:
+        effect: Raindrop
+      target:
+        device_id: ab20328f975dbb2cda819b0154accefa
+    - delay:
+        hours: 0
+        minutes: 30
+        seconds: 0
+        milliseconds: 0
+    - service: light.turn_on
+      data:
+        color_temp: 390
+        brightness_pct: 80
+      target:
+        device_id: ab20328f975dbb2cda819b0154accefa
+    enabled: true
+    else:
+    - service: light.turn_on
+      data:
+        brightness_pct: 80
+        color_temp: 390
+      target:
+        device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1654368565514'
+  alias: When user is not in the desk area
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion1_occupancy
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  mode: single
+- id: '1655809271856'
+  alias: Twin Change Lamp Brightness
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonlampbrightness
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  action:
+  - service: light.turn_on
+    data:
+      brightness: '{{ states(''sensor.twinbuttonlampbrightness'')|int }}
+
+        '
+    target:
+      device_id: 18fdd4c2e60f26092616d65ebb41bc43
+  mode: single
+- id: '1655812172419'
+  alias: Twin toggle lamp
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonlampbutton
+    from: '0'
+    to: '1'
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonlampbutton
+    from: '1'
+    to: '0'
+  condition: []
+  action:
+  - type: toggle
+    device_id: 18fdd4c2e60f26092616d65ebb41bc43
+    entity_id: light.desklamp
+    domain: light
+  mode: single
+- id: '1655812210640'
+  alias: Twin toggle light strip
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonstripbutton
+    from: '0'
+    to: '1'
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonstripbutton
+    from: '1'
+    to: '0'
+  condition: []
+  action:
+  - type: toggle
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  mode: single
+- id: '1655812338536'
+  alias: Twin change light strip to cold white
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttoncoldlight
+  condition:
+  - condition: state
+    entity_id: sensor.twinbuttoncoldlight
+    state: '1'
+  action:
+  - service: light.turn_on
+    data:
+      color_temp: 260
+      brightness_step: 255
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1655812376599'
+  alias: Twin change light strip to warm white
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonwarmlight
+    to: '1'
+    from: '0'
+    enabled: false
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonwarmlight
+    to: '1'
+    from: Unavailable
+    enabled: false
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonwarmlight
+  condition:
+  - condition: state
+    entity_id: sensor.twinbuttonwarmlight
+    state: '1'
+  action:
+  - service: light.turn_on
+    data:
+      color_temp: 390
+      brightness_step: 255
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1655812448936'
+  alias: Twin change light strip to red
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonredlight
+    from: '0'
+    to: '1'
+    enabled: false
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonredlight
+  condition:
+  - condition: state
+    entity_id: sensor.twinbuttonredlight
+    state: '1'
+  action:
+  - repeat:
+      count: '5'
+      sequence:
+      - service: light.turn_on
+        data:
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness_step: 255
+        target:
+          device_id: ab20328f975dbb2cda819b0154accefa
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 1
+          milliseconds: 0
+      - service: light.turn_off
+        data: {}
+        target:
+          device_id: ab20328f975dbb2cda819b0154accefa
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+  - service: light.turn_on
+    data:
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      brightness_step: 255
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1655814005890'
+  alias: Twin Change Light Strip Brightness
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.twinbuttonstripbrightness
+  condition:
+  - condition: device
+    type: is_on
+    device_id: ab20328f975dbb2cda819b0154accefa
+    entity_id: light.lightstrip
+    domain: light
+  action:
+  - service: light.turn_on
+    data:
+      brightness: '{{ states(''sensor.twinbuttonstripbrightness'')|int }}
+
+        '
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
+  mode: single
+- id: '1657574164335'
+  alias: SGP30 has error
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.selfbuiltairmonitorvoc
+    for:
+      hours: 24
+      minutes: 0
+      seconds: 0
+    below: '2'
+  - platform: numeric_state
+    entity_id: sensor.selfbuiltairmonitorco2
+    for:
+      hours: 24
+      minutes: 0
+      seconds: 0
+    below: '405'
+  condition: []
+  action:
+  - device_id: e65ca273990fb141ed49b2630099b6ce
+    domain: mobile_app
+    type: notify
+    message: Go check it!
+    title: SGP30 is malfunctioning!
+  mode: single
