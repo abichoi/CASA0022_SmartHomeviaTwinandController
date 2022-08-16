@@ -18,6 +18,9 @@ In addition, a physical twin and a controller are 3D printed and laser cut.
 #### Controller  
 ![image](https://user-images.githubusercontent.com/91946874/184911785-45d2c517-2914-4e67-bddc-eddeeab01069.png)  
 
+### Code
+[Code Explanation](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/Code_Explanation.md)
+
 ## Results
 It is possible to deploy a smart home in a small living space and utilise the data collected by the smart home outside the system via a physical twin and controller. However, it is noted that the potential of the smart home is limited as it is easy for sensors' detection areas to overlay and it is difficult to differentiate different activitis in the same area.
 
