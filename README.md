@@ -40,7 +40,7 @@ It is possible to deploy a smart home in a small living space and utilise the da
 12. NeoPixel Stick
 13. Power Bank: Anker PowerCore 20000 PD (Optional)
 #### Files
-Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d
+Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d  
 Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
 
 
