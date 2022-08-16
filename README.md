@@ -14,6 +14,16 @@ In addition, a physical twin and a controller are 3D printed and laser cut.
 ## Results
 It is possible to deploy a smart home in a small living space and utilise the data collected by the smart home outside the system via a physical twin and controller. However, it is noted that the potential of the smart home is limited as it is easy for sensors' detection areas to overlay and it is difficult to differentiate different activitis in the same area.
 
+## Resulted Devices
+### Physical Twin with 3D Printed Walls
+![image](https://user-images.githubusercontent.com/91946874/184908438-35610964-ef20-4f38-941f-fb350af042e4.png)
+
+### Physical Twin with Laser Cut Walls
+![image](https://user-images.githubusercontent.com/91946874/184907338-3e9f2732-d167-4e4e-9327-4e68d02420f8.png)
+
+### Self Built Air Monitor
+![image](https://user-images.githubusercontent.com/91946874/184907957-27bd574c-8a06-423a-ab1b-dc6a0b1ad9c2.png)
+
 ## Used Softwares and Hardwares
 ### Physical Twin
 1. Modeling Software: Autodesk Fusion 360
@@ -30,8 +40,8 @@ It is possible to deploy a smart home in a small living space and utilise the da
 12. NeoPixel Stick
 13. Power Bank: Anker PowerCore 20000 PD (Optional)
 #### Files
-Version 1: DigitalTwin_3DPrintWall_Github v3.f3d
-Version 2: DigitalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
+Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d
+Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
 
 
 ### Controller
@@ -46,6 +56,7 @@ Version 2: DigitalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
 10. 4.7k Resistor
 11. Potentiometer x2
 12. Diode x2
+13. Phomemo M02 Pocket Printer (Optional)
 #### File
 Buttons_GIthub v11.f3d
 
