@@ -40,7 +40,7 @@ It is possible to deploy a smart home in a small living space and utilise the da
 12. NeoPixel Stick
 13. Power Bank: Anker PowerCore 20000 PD (Optional)
 #### Files
-Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d
+Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d  
 Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
 
 
@@ -71,7 +71,7 @@ Buttons_GIthub v11.f3d
 SelfBuiltAirMonitor_Case_Github v3.f3d
 
 ### Smart Home
-1. Smart Home Platform: Home Assistant
+1. Smart Home Platform: Home Assistant OS
 2. Raspberry Pi 4B
 3. SONOFF Zigbee 3.0 USB Dongle Plus
 4. Aqara Motion Sensor x3
