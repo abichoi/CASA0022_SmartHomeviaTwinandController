@@ -158,7 +158,6 @@ void loop() {
     reconnect();
   }
   client.loop();
- //  sendMQTT();
 }
 
 //set up wifi
@@ -197,15 +196,6 @@ void startWifi(){
   Serial.println(WiFi.localIP());
 }
 
-//void sendMQTT() {
-//  delay(5000);
-//  ++value;
-//  snprintf (msg, 50, "hello world #%ld", value);
-//  Serial.print("Publish message: ");
-//  Serial.println(msg);
-//  client.publish(topic_test, msg);
-//}
-
 void callback(String topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -228,9 +218,6 @@ void callback(String topic, byte* payload, unsigned int length) {
     Serial.print("received_test:");
     Serial.println(received_test);
   } else if (topic == topic_air2){
-//    air = combine;
-//    Serial.print("air:");
-//    Serial.println(air);
     Serial.print("air monitor update");
     StaticJsonDocument <256> doc;
     deserializeJson(doc,payload);
