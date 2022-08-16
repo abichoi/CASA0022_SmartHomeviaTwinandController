@@ -11,6 +11,13 @@ A smart home based on Home Assistant is deployed in a student accomadation studi
 ![image](https://user-images.githubusercontent.com/91946874/184563082-746f74e4-83db-4650-84e4-a6540e78fa75.png)
 In addition, a physical twin and a controller are 3D printed and laser cut.
 
+### Circuits  
+#### Physical Twin  
+![image](https://user-images.githubusercontent.com/91946874/184911723-add674e3-bae1-4c86-a6cd-7701b7fa4579.png)  
+  
+#### Controller  
+![image](https://user-images.githubusercontent.com/91946874/184911785-45d2c517-2914-4e67-bddc-eddeeab01069.png)  
+
 ## Results
 It is possible to deploy a smart home in a small living space and utilise the data collected by the smart home outside the system via a physical twin and controller. However, it is noted that the potential of the smart home is limited as it is easy for sensors' detection areas to overlay and it is difficult to differentiate different activitis in the same area.
 
