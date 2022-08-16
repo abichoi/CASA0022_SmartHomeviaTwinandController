@@ -32,38 +32,37 @@ It is possible to deploy a smart home in a small living space and utilise the da
 ![image](https://user-images.githubusercontent.com/91946874/184907957-27bd574c-8a06-423a-ab1b-dc6a0b1ad9c2.png)
 
 ## Used Softwares and Hardwares
-### Physical Twin
+### General
 1. Modeling Software: Autodesk Fusion 360
 2. 3D Printer: Original Prusa i3 MK3S+ 3D printer
-3. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
-4. Laser Cutter Software: RD Works version 7/ Rhino
-5. Servo Driver PCA9685
-6. NodeMCU
-7. Micro USB to USB-A or USB-C cable
-8. Servo Motor x3
-9.  2.9" E-Ink Display Module
-10. LED
-11. 220Ω Resistor
-12. NeoPixel Stick
-13. Power Bank: Anker PowerCore 20000 PD (Optional)
+### Physical Twin
+1. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
+2. Laser Cutter Software: RD Works version 7/ Rhino
+3. Servo Driver PCA9685
+4. NodeMCU
+5. Micro USB to USB-A or USB-C cable
+6. Servo Motor x3
+7.  2.9" E-Ink Display Module
+8. LED
+9. 220Ω Resistor
+10. NeoPixel Stick
+11. Power Bank: Anker PowerCore 20000 PD (Optional)
 #### Files
 Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d  
 Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
 
 
 ### Controller
-1. Modeling Software: Autodesk Fusion 360
-2. 3D Printer: Original Prusa i3 MK3S+ 3D printer
-3. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
-4. Laser Cutter Software: RD Works version 7/ Rhino
-6. NodeMCU
-7. Micro USB to USB-A or USB-C cable
-8. Push Button x 5
-9. 10kΩ Resistor x 5
-10. 4.7k Resistor
-11. Potentiometer x2
-12. Diode x2
-13. Phomemo M02 Pocket Printer (Optional)
+1. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
+2. Laser Cutter Software: RD Works version 7/ Rhino
+3. NodeMCU
+4. Micro USB to USB-A or USB-C cable
+5. Push Button x 5
+6. 10kΩ Resistor x 5
+7. 4.7k Resistor
+8. Potentiometer x2
+9. Diode x2
+10. Phomemo M02 Pocket Printer (Optional)
 #### File
 Buttons_GIthub v11.f3d
 
