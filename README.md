@@ -131,6 +131,7 @@ The furnitures can be printed at 10% infill (except the desk, chair, toilet, sin
 ```
 MQTT_BROKER = "YOUR_MQTT_BROKER"
 MQTT_BROKER_PORT = YOUR_PORT
+MQTT_TOPIC = "YOUR_MQTT_TOPIC"
 USERNAME = "YOUR_USER_NAME"
 PASSWORD = "YOUR_PASSWORD"
 ```
