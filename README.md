@@ -31,6 +31,9 @@ It is possible to deploy a smart home in a small living space and utilise the da
 ### Physical Twin with Laser Cut Walls
 ![image](https://user-images.githubusercontent.com/91946874/184907338-3e9f2732-d167-4e4e-9327-4e68d02420f8.png)
 
+### Controller
+![image](https://user-images.githubusercontent.com/91946874/185166107-f1fa6994-3d10-4034-8128-97ac7b2eee27.png)  
+
 ### Self Built Air Monitor
 ![image](https://user-images.githubusercontent.com/91946874/184907957-27bd574c-8a06-423a-ab1b-dc6a0b1ad9c2.png)
 
@@ -38,6 +41,7 @@ It is possible to deploy a smart home in a small living space and utilise the da
 ### General
 1. Modeling Software: Autodesk Fusion 360
 2. 3D Printer: Original Prusa i3 MK3S+ 3D printer
+
 ### Physical Twin
 1. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
 2. Laser Cutter Software: RD Works version 7/ Rhino
@@ -53,7 +57,6 @@ It is possible to deploy a smart home in a small living space and utilise the da
 #### Files
 Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d  
 Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
-
 
 ### Controller
 1. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
@@ -98,3 +101,33 @@ SelfBuiltAirMonitor_Case_Github v3.f3d
 3. Grafana
 4. InfluxDB
 5. Zigbee2MQTT
+
+## How to recreate this project
+### Physical Twin
+1. Connect the components according to the circuit diagram above and run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/Physical_Devices_Code/MQTT_EInk_Driver_LED_PIXEL) on NodeMCU through ArduinoIDE
+2. Print out the 3D model of different parts one by one and assemble them just like the 3D model file
+**Please note:**  
+The furnitures can be printed at 10% infill (except the desk, chair, toilet, sinks and stove), so that the top of the physical twin won't be too heavy.  
+3. Laser cut the walls using the DXF files in the [DXF folder](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/DXF) if you would like to have a clear wall
+
+### Controller
+1. Connect the components according to the circuit diagram above and run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/Physical_Devices_Code/buttons) on NodeMCU through ArduinoIDE
+2. Print out the 3D model of the cover and base of the controller
+3. Laser cut the cover if you would like to see be able to see the circuit
+4. Instruction on the controller is printed with Phomemo M02 Pocket Printer, this is optional
+
+### Self Built Air Monitor
+1. Connect the Enviro to Raspberry Pi and SGP30 and PMS5003 to Enviro according to the table below
+| Enviro  | Other Compoenents |
+| ------------- | ------------- |
+| 3V3  | SGP30 VIN  |
+| GND  | SGP30 GND  |
+| SCL  | SGP30 SCL  |
+| SDA  | SGP30 SDA  |
+| PM  | PMS5003  |
+2. Create a .env file to store the MQTT credentials follwing this [tutorial](https://www.geeksforgeeks.org/how-to-hide-sensitive-credentials-using-python/)
+3. run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/SelfBuiltAirMonitor.py) on Raspberry Pi
+
+
+### Home Assistant
+[Setps to recreate Home Assistant](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Home_Assistant/RecreateHASS.md)
