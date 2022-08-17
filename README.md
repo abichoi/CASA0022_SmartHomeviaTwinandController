@@ -56,7 +56,7 @@ It is possible to deploy a smart home in a small living space and utilise the da
 11. Power Bank: Anker PowerCore 20000 PD (Optional)
 #### Files
 Version 1: PhysicalTwin_3DPrintWall_Github v3.f3d  
-Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
+Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the PhysicalTwin_Walls folder in DXF folder
 
 ### Controller
 1. Laser Cutter: Piranha Bodor laser cutter/ Trotec laser cutter
@@ -70,7 +70,7 @@ Version 2: PhysicalTwin_LaserCutWall_Github v8.f3d, the whole DXF folder
 9. Diode x2
 10. Phomemo M02 Pocket Printer (Optional)
 #### File
-Buttons_GIthub v11.f3d
+Buttons_GIthub v11.f3d, Controller folder in DXF folder
 
 ### Self-Built Air Monitor
 1. Modeling Software: Autodesk Fusion 360
@@ -108,12 +108,12 @@ SelfBuiltAirMonitor_Case_Github v3.f3d
 2. Print out the 3D model of different parts one by one and assemble them just like the 3D model file. The wall has to be glued.
 **Please note:**  
 The furnitures can be printed at 10% infill (except the desk, chair, toilet, sinks and stove), so that the top of the physical twin won't be too heavy.  
-3. Laser cut the walls using the DXF files in the [DXF folder](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/DXF) if you would like to have a clear wall
+3. Laser cut the walls using the DXF files in the [PhysicalTwin_Walls folder](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/DXF/PhysicalTwin_Walls) if you would like to have a clear wall. Afterwards, glue the walls together
 
 ### Controller
 1. Connect the components according to the circuit diagram above and run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/Physical_Devices_Code/buttons) on NodeMCU through ArduinoIDE
 2. Print out the 3D model of the cover and base of the controller
-3. Laser cut the cover if you would like to see be able to see the circuit
+3. Laser cut the cover using the DXF files in the [Controller folder](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/DXF/Controller)if you would like to see be able to see the circuit
 4. Instruction on the controller is printed with Phomemo M02 Pocket Printer, this is optional
 
 ### Self Built Air Monitor
