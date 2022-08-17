@@ -25,4 +25,4 @@
    Please make sure the name and unique_id are correct. If you change it afterwards, HASS will not store the previous data in the new name.
 8. After ensuring all devices are connected to HASS, add automations by editing automations.yaml or through the "Automations & Scenes" tab in the Settings. The automations.yaml file used in this dissertation is provided in this Home_Assistant folder.  
    **Please note:**  
-   If the automations with time triggers/conditions are not working at that specific time, it is possible that you need to set up your timezone in Settings > System > General.
+   If the automations with time triggers/conditions are not working at that specific time, it is possible that you need to set up your time zone in Settings > System > General.
