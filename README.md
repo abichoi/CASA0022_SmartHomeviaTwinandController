@@ -105,7 +105,7 @@ SelfBuiltAirMonitor_Case_Github v3.f3d
 ## How to recreate this project
 ### Physical Twin
 1. Connect the components according to the circuit diagram above and run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/Physical_Devices_Code/MQTT_EInk_Driver_LED_PIXEL) on NodeMCU through ArduinoIDE
-2. Print out the 3D model of different parts one by one and assemble them just like the 3D model file
+2. Print out the 3D model of different parts one by one and assemble them just like the 3D model file. The wall has to be glued.
 **Please note:**  
 The furnitures can be printed at 10% infill (except the desk, chair, toilet, sinks and stove), so that the top of the physical twin won't be too heavy.  
 3. Laser cut the walls using the DXF files in the [DXF folder](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/tree/main/DXF) if you would like to have a clear wall
