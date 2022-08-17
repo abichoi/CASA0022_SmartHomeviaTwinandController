@@ -135,7 +135,7 @@ MQTT_TOPIC = "YOUR_MQTT_TOPIC"
 USERNAME = "YOUR_USER_NAME"
 PASSWORD = "YOUR_PASSWORD"
 ```
-4. run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/SelfBuiltAirMonitor.py) on Raspberry Pi
+4. Run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/SelfBuiltAirMonitor.py) on Raspberry Pi
 
 ### Home Assistant
 [Setps to recreate Home Assistant](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Home_Assistant/RecreateHASS.md)
