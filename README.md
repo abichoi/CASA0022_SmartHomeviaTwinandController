@@ -117,7 +117,8 @@ The furnitures can be printed at 10% infill (except the desk, chair, toilet, sin
 4. Instruction on the controller is printed with Phomemo M02 Pocket Printer, this is optional
 
 ### Self Built Air Monitor
-1. Connect the Enviro to Raspberry Pi and SGP30 and PMS5003 to Enviro according to the table below
+1. Connect the Enviro to Raspberry Pi and SGP30 and PMS5003 to Enviro according to the table below  
+
 | Enviro  | Other Compoenents |
 | ------------- | ------------- |
 | 3V3  | SGP30 VIN  |
@@ -125,9 +126,9 @@ The furnitures can be printed at 10% infill (except the desk, chair, toilet, sin
 | SCL  | SGP30 SCL  |
 | SDA  | SGP30 SDA  |
 | PM  | PMS5003  |
+
 2. Create a .env file to store the MQTT credentials follwing this [tutorial](https://www.geeksforgeeks.org/how-to-hide-sensitive-credentials-using-python/)
 3. run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/SelfBuiltAirMonitor.py) on Raspberry Pi
-
 
 ### Home Assistant
 [Setps to recreate Home Assistant](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Home_Assistant/RecreateHASS.md)
