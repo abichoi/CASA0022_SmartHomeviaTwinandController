@@ -127,8 +127,14 @@ The furnitures can be printed at 10% infill (except the desk, chair, toilet, sin
 | SDA  | SGP30 SDA  |
 | PM  | PMS5003  |
 
-2. Create a .env file to store the MQTT credentials follwing this [tutorial](https://www.geeksforgeeks.org/how-to-hide-sensitive-credentials-using-python/)
-3. run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/SelfBuiltAirMonitor.py) on Raspberry Pi
+2. Create a .env file to store the MQTT credentials follwing this [tutorial](https://www.geeksforgeeks.org/how-to-hide-sensitive-credentials-using-python/) with the following format
+```
+MQTT_BROKER = "YOUR_MQTT_BROKER"
+MQTT_BROKER_PORT = YOUR_PORT
+USERNAME = "YOUR_USER_NAME"
+PASSWORD = "YOUR_PASSWORD"
+```
+4. run the [code](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Physical_Devices_Code/SelfBuiltAirMonitor.py) on Raspberry Pi
 
 ### Home Assistant
 [Setps to recreate Home Assistant](https://github.com/abichoi/CASA0022_SmartHomeviaTwinandController/blob/main/Home_Assistant/RecreateHASS.md)
