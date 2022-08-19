@@ -32,7 +32,7 @@ It is possible to deploy a smart home in a small living space and utilise the da
 ![image](https://user-images.githubusercontent.com/91946874/184908438-35610964-ef20-4f38-941f-fb350af042e4.png)
 
 ### Physical Twin with Laser Cut Walls
-![image](https://user-images.githubusercontent.com/91946874/184907338-3e9f2732-d167-4e4e-9327-4e68d02420f8.png)
+![image](https://user-images.githubusercontent.com/91946874/185660320-b1c0e96f-0f59-46ba-82ff-e95342085c38.png)
 
 ### Controller with 3D Printed Cover
 ![image](https://user-images.githubusercontent.com/91946874/185187774-e22e6e8b-ad5b-47a7-ba7f-9e98d040df19.png)
