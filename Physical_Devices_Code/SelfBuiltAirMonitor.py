@@ -213,7 +213,7 @@ def main():
     print("MQTT broker IP: {}".format(MQTT_BROKER))
 
     # Main loop to read data, display, and send over mqtt
-    mqtt_client.loop_sStart()
+    mqtt_client.loop_start()
     while True:
         try:
             values = read_bme280(bme280)
