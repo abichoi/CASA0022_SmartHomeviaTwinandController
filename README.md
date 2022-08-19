@@ -25,7 +25,7 @@ In addition, a physical twin and a controller are 3D printed and laser cut.
 It is possible to deploy a smart home in a small living space and utilise the data collected by the smart home outside the system via a physical twin and controller. However, it is noted that the potential of the smart home is limited as it is easy for sensors' detection areas to overlay and it is difficult to differentiate different activitis in the same area.
 
 ## Demostration
-[![A demonstration video of HASS Automations used in this dissertation on YouTube](https://user-images.githubusercontent.com/91946874/185552915-d5d7c1e1-62fb-4d8b-9e74-a86aa449651a.jpg)](https://www.youtube.com/watch?v=u03u2zkh45s)
+[![A demonstration video of HASS Automations used in this dissertation on YouTube](https://user-images.githubusercontent.com/91946874/185557382-bfeaf20b-e317-43ef-bc5a-f7d50896491a.jpg)](https://youtu.be/vFsg55t07NU)
 
 ## Resulted Devices
 ### Physical Twin with 3D Printed Walls
