@@ -468,41 +468,12 @@
     - binary_sensor.door2_contact
     for:
       hours: 0
-      minutes: 5
+      minutes: 10
       seconds: 0
     from: 'off'
     to: 'on'
-  condition:
-  - condition: state
-    entity_id: binary_sensor.motion1_occupancy
-    state: 'off'
-    enabled: false
-  - condition: state
-    entity_id: binary_sensor.motion2_occupancy
-    state: 'off'
-    enabled: false
-  - condition: state
-    state: 'off'
-    entity_id: binary_sensor.motion3_occupancy
-    enabled: false
-  - condition: state
-    entity_id: light.lightstrip
-    state: 'on'
-    enabled: false
+  condition: []
   action:
-  - service: light.turn_off
-    data: {}
-    target:
-      device_id:
-      - 18fdd4c2e60f26092616d65ebb41bc43
-      - ab20328f975dbb2cda819b0154accefa
-    enabled: false
-  - service: mqtt.publish
-    data:
-      topic: student/CASA0022/ucfnsmc/Location
-      qos: '2'
-      payload: Area4
-    enabled: false
   - if:
     - condition: and
       conditions:
@@ -613,67 +584,12 @@
     entity_id: light.lightstrip
     domain: light
   action:
-  - if:
-    - condition: state
-      entity_id: sensor.openweathermap_forecast_condition
-      state: rainy
-    then:
-    - service: tplink.random_effect
-      data:
-        brightness: 100
-        brightness_range: 90, 100
-        random_seed: 80
-        init_states: 203,14,100
-        backgrounds:
-        - - 203
-          - 14
-          - 100
-        - - 180
-          - 0
-          - 0
-        transition: 1000
-        fadeoff: 1000
-        duration: 5000
-        transition_range: 1000, 6000
-      target:
-        device_id: ab20328f975dbb2cda819b0154accefa
-      enabled: false
-    - delay:
-        hours: 0
-        minutes: 0
-        seconds: 30
-        milliseconds: 0
-      enabled: false
-    - service: tplink.random_effect
-      data:
-        init_states: 30,40,100
-      target:
-        device_id: ab20328f975dbb2cda819b0154accefa
-      enabled: false
-    - service: light.turn_on
-      data:
-        effect: Raindrop
-      target:
-        device_id: ab20328f975dbb2cda819b0154accefa
-    - delay:
-        hours: 0
-        minutes: 30
-        seconds: 0
-        milliseconds: 0
-    - service: light.turn_on
-      data:
-        color_temp: 390
-        brightness_pct: 80
-      target:
-        device_id: ab20328f975dbb2cda819b0154accefa
-    enabled: true
-    else:
-    - service: light.turn_on
-      data:
-        brightness_pct: 80
-        color_temp: 390
-      target:
-        device_id: ab20328f975dbb2cda819b0154accefa
+  - service: light.turn_on
+    data:
+      brightness_pct: 80
+      color_temp: 390
+    target:
+      device_id: ab20328f975dbb2cda819b0154accefa
   mode: single
 - id: '1654368565514'
   alias: When user is not in the desk area
